@@ -10,6 +10,9 @@
             <form action="logout.php" method="POST">
                 <button type="submit">Logout</button>
             </form>
+            <form action="../src/citizendata.php" method="POST">
+                <button type="submit">Profile</button>
+            </form>
         </ul>
     </div>
 </nav>
