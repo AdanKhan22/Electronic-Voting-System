@@ -1,18 +1,9 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "electronic_voting";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include '../db/connection.php';
 
 
-$sql = "SELECT name, email FROM citizen";
+$sql = "SELECT userID , name, email FROM citizen";
 $result = $conn->query($sql);
 
 
@@ -35,7 +26,7 @@ $conn->close();
         <?php
         if (count($citizens) > 0) {
             foreach ($citizens as $citizen) {
-                echo "<li>" . htmlspecialchars($citizen['name']) . " - " . htmlspecialchars($citizen['email']) . "</li>";
+                echo "<li>" . htmlspecialchars($citizen['userID']) . " - " . htmlspecialchars($citizen['name']) . " - " . htmlspecialchars($citizen['email']) . "</li>";
             }
         } else {
             echo "<li>No citizens registered.</li>";
