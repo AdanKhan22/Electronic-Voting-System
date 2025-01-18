@@ -44,6 +44,7 @@ if (isset($_SESSION['user_id']) && isset($_POST['candidateId']) && isset($_POST[
     if ($checkVoteResult->num_rows > 0) {
         echo "You have already voted in this election.<br>";
     } else {
+
         $candidateSql = "SELECT ConstituencyID FROM Candidate WHERE CandidateID = '$candidateId'";
         $candidateResult = $conn->query($candidateSql);
         $candidateRow = $candidateResult->fetch_assoc();
@@ -51,16 +52,34 @@ if (isset($_SESSION['user_id']) && isset($_POST['candidateId']) && isset($_POST[
 
         $timestamp = date('Y-m-d H:i:s');
 
+
         $voteSql = "INSERT INTO Votes (VoterID, CandidateID, ElectionID, Timestamp, ConstituencyID, HasVoted) 
                     VALUES ('$userId', '$candidateId', '$electionId', '$timestamp', '$constituencyId', 1)";
         if ($conn->query($voteSql) === TRUE) {
             echo "Vote cast successfully!<br>";
 
-            $updateVoteCountSql = "UPDATE Candidate SET TotalVotes = TotalVotes + 1 WHERE CandidateID = '$candidateId'";
-            if ($conn->query($updateVoteCountSql) === TRUE) {
-                echo "Total votes updated successfully for the candidate.<br>";
+
+            $checkResultsSql = "SELECT * FROM Results WHERE CandidateID = '$candidateId' AND ElectionID = '$electionId'";
+            $checkResultsResult = $conn->query($checkResultsSql);
+
+            if ($checkResultsResult->num_rows == 0) {
+
+                $insertResultsSql = "INSERT INTO Results (CandidateID, ElectionID, TotalVotes) 
+                                     VALUES ('$candidateId', '$electionId', 1)";
+                if ($conn->query($insertResultsSql) === TRUE) {
+                    echo "Results record created successfully!<br>";
+                } else {
+                    echo "Error creating results record: " . $conn->error . "<br>";
+                }
             } else {
-                echo "Error updating the total votes: " . $conn->error . "<br>";
+
+                $updateVoteCountSql = "UPDATE Results SET TotalVotes = TotalVotes + 1 
+                                       WHERE CandidateID = '$candidateId' AND ElectionID = '$electionId'";
+                if ($conn->query($updateVoteCountSql) === TRUE) {
+                    echo "Total votes updated successfully for the candidate.<br>";
+                } else {
+                    echo "Error updating the total votes: " . $conn->error . "<br>";
+                }
             }
         } else {
             echo "Error voting for candidate " . $candidateId . ": " . $conn->error . "<br>";
