@@ -1,0 +1,142 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f7;
+    color: #333;
+}
+
+
+nav {
+    background-color: #0056b3;
+    padding: 15px 0;
+    color: white;
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+nav .logo {
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav .nav-links {
+    list-style: none;
+    display: flex;
+}
+
+nav .nav-links li {
+    margin: 0 15px;
+}
+
+nav .nav-links a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+nav .nav-links a:hover {
+    color: #f0f4f7;
+}
+
+.home {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.home h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.home .card-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.home .card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.home .card h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.home .card p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.home .card .btn {
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.home .card .btn:hover {
+    background-color: #003f8f;
+}
+
+/* Section styling */
+section {
+    padding: 50px 20px;
+    margin: 20px 0;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    background-color: #f8f8f8;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+
+footer {
+    background-color: #0056b3;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
