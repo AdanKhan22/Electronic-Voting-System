@@ -8,8 +8,6 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
     exit;
 }
 
-$error_message = "";
-
 
 $servername = "localhost";
 $username = "root";
@@ -28,18 +26,25 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
 
 
-    $sql = "SELECT userID, password FROM citizen WHERE Name='$username'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT userID, password, role FROM citizen WHERE Name = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-
         $user = $result->fetch_assoc();
-
 
         if (password_verify($password, $user['password'])) {
 
+
             $_SESSION['authenticated'] = true;
             $_SESSION['user_id'] = $user['userID'];
+
+
+            if ($user['role'] === 'admin') {
+                header('Location: /Electronic_Voting/admin/citizendata.php');
+                exit;
+            }
 
 
             header('Location: index.php');

@@ -8,6 +8,7 @@
             <li><a href="index.php?page=elections">Elections</a></li>
             <li><a href="index.php?page=results">Results</a></li>
             <form action="logout.php" method="POST">
+
                 <button type="submit">Logout</button>
             </form>
             <form action="../src/citizendata.php" method="POST">
