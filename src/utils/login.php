@@ -42,12 +42,12 @@ if (isset($_POST['login'])) {
 
 
             if ($user['role'] === 'admin') {
-                header('Location: /Electronic_Voting/admin/citizendata.php');
+                header('Location: /Electronic_Voting/admin/adminpanel.php');
                 exit;
             }
 
 
-            header('Location: index.php');
+            header('Location: /Electronic_Voting/public/index.php');
             exit;
         } else {
             $error_message = "Invalid username or password.";
